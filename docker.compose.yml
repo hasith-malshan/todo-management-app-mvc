@@ -1,0 +1,24 @@
+services:
+  db:
+    image: mysql:8.0.29
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'todos'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'todos-user'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'todos-password'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'root-password'
+    ports:
+      # <Port exposed> : <MySQL Port running inside container>
+      - '3306:52000'
+    expose:
+      # Opens port 3306 on the container
+      - '5200'
+      # Where our data will be persisted
+    volumes:
+      - my-db:/var/lib/mysql
+# Names our volume
+volumes:
+  my-db:
